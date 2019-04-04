@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         Mapbox.getInstance(
             this,
-            "pk.eyJ1IjoiYmlsaXplbjMiLCJhIjoiY2p1MW90MTZkMDN3MTN5bGtjb3FuaTllNSJ9.gltr3BTKf3zeqzxwPTKsrg"
+            getString(R.string.mapbox_token)
         )
         setContentView(R.layout.activity_main)
         mvCluster = findViewById(R.id.mvCluster)
@@ -81,14 +81,14 @@ class MainActivity : AppCompatActivity() {
             features.add(feature)
             features.add(feature2)
 
-            val featuresJson =
+            val collectionFeaturesJson =
                 "{ \"type\": \"FeatureCollection\", \"features\": [ { \"type\": \"Feature\", \"properties\": { \"id\": \"ak16994521\", \"mag\": 2.3, \"time\": 1507425650893, \"felt\": null, \"tsunami\": 0 }, \"geometry\": { \"type\": \"Point\", \"coordinates\": [ -151.5129, 63.1016, 0.0 ] } }, { \"type\": \"Feature\", \"properties\": { \"id\": \"ak16994519\", \"mag\": 1.7, \"time\": 1507425289659, \"felt\": null, \"tsunami\": 0 }, \"geometry\": { \"type\": \"Point\", \"coordinates\": [ -150.4048, 63.1224, 105.5 ] } } ] }"
-            val featureCollection = FeatureCollection.fromJson(featuresJson)
+            val featureCollection = FeatureCollection.fromJson(collectionFeaturesJson)
             val source = GeoJsonSource(
                 "earthquakes", featureCollection, GeoJsonOptions()
                     .withCluster(true)
                     .withClusterMaxZoom(14)
-                    .withClusterRadius(10)
+                    .withClusterRadius(50)
             )
             loadedMapStyle.addSource(source)
 
